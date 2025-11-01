@@ -35,7 +35,7 @@ public class InputValidatorTest extends NsTest {
     @Test
     void 구입금액_검증_빈문자열(){
         //given
-        String input = "";
+        String input = "\n";
 
         //when & then
         assertThat(inputValidator.validatePurchaseAmount(input))
@@ -106,7 +106,7 @@ public class InputValidatorTest extends NsTest {
     @Test
     void 당첨번호_검증_빈문자열(){
         //given
-        String input = "";
+        String input = "\n";
 
         //when & then
         assertThat(inputValidator.validateWinningNumbers(input))
@@ -152,10 +152,61 @@ public class InputValidatorTest extends NsTest {
     /**
      * 보너스번호 검증(정상)
      */
+    @ParameterizedTest
+    @CsvSource({"'7','7'",
+                "' 14 ', '14'"})
+    void 보너스번호_검증_정상입력(String input, String expected) {
+        int expectedNumber = Integer.parseInt(expected.trim());
+        //when & then
+        assertThat(inputValidator.validateBonusNumber(input, List.of(1, 2, 3, 4, 5, 6)))
+                .doesNotThrowAnyException()
+                .isEqualTo(expectedNumber);
+    }
 
     /**
      * 보너스번호 검증(예외)
      */
+    @Test
+    void 보너스번호_검증_빈문자열(){
+        //given
+        String input = "\n";
+
+        //when & then
+        assertThat(inputValidator.validateBonusNumber(input, List.of(1,2,3,4,5,6)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE.getMessage());
+    }
+
+    @Test
+    void 보너스번호_검증_당첨번호와_중복(){
+        //given
+        String input = "3";
+
+        //when & then
+        assertThat(inputValidator.validateBonusNumber(input, List.of(1,2,3,4,5,6)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ExceptionMessages.INVALID_BONUS_NUMBER.getMessage());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"0", "46", "-5"})
+    void 보너스번호_검증_범위_벗어난_숫자(String input){
+        assertThat(inputValidator.validateBonusNumber(input, List.of(1,2,3,4,5,6)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE.getMessage());
+    }
+
+    @Test
+    void 보너스번호_검증_비정상_문자_포함(){
+        //given
+        String input = "a";
+
+        //when & then
+        assertThat(inputValidator.validateBonusNumber(input, List.of(1,2,3,4,5,6)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE.getMessage());
+    }
+
     @Override
     protected void runMain() {
     }
