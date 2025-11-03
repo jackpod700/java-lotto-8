@@ -27,8 +27,8 @@ public enum LottoPrize {
 
     /**
      * 일치 개수와 보너스 여부를 받아 등수를 반환합니다. 이 메서드는 enum 외부에서 호출되므로 static으로 선언해야 합니다.
-     * * @param matchCount 일치하는 번호의 개수
      *
+     * @param matchCount 일치하는 번호의 개수
      * @param hasBonus 보너스 번호 일치 여부
      * @return
      */

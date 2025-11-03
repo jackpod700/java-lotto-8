@@ -59,7 +59,6 @@ public class LottoGame {
                 continue;
             }
             break;
-
         }
         ticketCount = parsePurchaseAmount(purchaseAmountInput);
     }
