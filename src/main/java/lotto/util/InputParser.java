@@ -1,7 +1,7 @@
 package lotto.util;
 
 import static lotto.enums.LottoConstant.LOTTO_PRICE;
-import static lotto.util.InputValidator.NUMBER_DELIMITER;
+import static lotto.util.LottoNumberValidator.NUMBER_DELIMITER;
 
 import java.util.Arrays;
 import java.util.List;

@@ -9,7 +9,6 @@ import java.util.List;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static lotto.enums.ExceptionMessages.DUPLICATE_LOTTO_NUMBERS;
-import static lotto.enums.ExceptionMessages.INVALID_BONUS_NUMBER;
 import static lotto.enums.ExceptionMessages.INVALID_LOTTO_NUMBER_COUNT;
 import static lotto.enums.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE;
 import static lotto.enums.ExceptionMessages.INVALID_PURCHASE_AMOUNT;
@@ -197,7 +196,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("1000", "1,2,3,4,5,6", "6", "7");
             assertThat(output()).contains(
-                    INVALID_BONUS_NUMBER.getMessage(),
+                    DUPLICATE_LOTTO_NUMBERS.getMessage(),
                     "당첨 통계" // 보너스 번호 재입력 성공 후, 통계로 넘어감
             );
         });

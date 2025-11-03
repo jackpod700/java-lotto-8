@@ -1,15 +1,11 @@
 package lotto.util;
 
 import static lotto.enums.ExceptionMessages.DUPLICATE_LOTTO_NUMBERS;
-import static lotto.enums.ExceptionMessages.INVALID_BONUS_NUMBER;
 import static lotto.enums.ExceptionMessages.INVALID_LOTTO_NUMBER_COUNT;
 import static lotto.enums.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE;
-import static lotto.enums.ExceptionMessages.INVALID_PURCHASE_AMOUNT;
-import static lotto.util.InputValidator.validateBonusNumber;
-import static lotto.util.InputValidator.validatePurchaseAmount;
-import static lotto.util.InputValidator.validateWinningNumbers;
+import static lotto.util.LottoNumberValidator.validateBonusNumber;
+import static lotto.util.LottoNumberValidator.validateWinningNumbers;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import java.util.List;
@@ -17,75 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class InputValidatorTest extends NsTest {
-
-    /**
-     * 구입금액 검증(정상)
-     */
-    @Test
-    void 구입금액_검증_정상입력(){
-        //given
-        String input = "5000";
-
-        //when & then
-        assertThatCode(()->validatePurchaseAmount(input))
-                .doesNotThrowAnyException();
-    }
-
-    /**
-     * 구입금액 검증(예외)
-     */
-    @Test
-    void 구입금액_검증_빈문자열(){
-        //given
-        String input = "\n";
-
-        //when & then
-        assertThatThrownBy(()->validatePurchaseAmount(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_PURCHASE_AMOUNT.getMessage());
-    }
-
-    @Test
-    void 구입금액_검증_1000원_단위_아닌_경우(){
-        //given
-        String input = "5500";
-
-        //when & then
-        assertThatCode(()->validatePurchaseAmount(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_PURCHASE_AMOUNT.getMessage());
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"-1000", "0"})
-    void 구입금액_검증_0이하(String input){
-        //when & then
-        assertThatCode(()->validatePurchaseAmount(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_PURCHASE_AMOUNT.getMessage());
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"abc", "12ab", "!!@@##","-1000"})
-    void 구입금액_검증_문자_포함된_경우(String input){
-        //when & then
-        assertThatCode(()->validatePurchaseAmount(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_PURCHASE_AMOUNT.getMessage());
-    }
-
-    @Test
-    void 구입금액_검증_너무_큰_숫자(){
-        //given
-        String input = "100000000000000000000";
-
-        //when & then
-        assertThatCode(()->validatePurchaseAmount(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_PURCHASE_AMOUNT.getMessage());
-    }
-
+public class LottoNumberValidatorTest extends NsTest {
     /**
      * 당첨번호 검증(정상)
      */
@@ -180,7 +108,7 @@ public class InputValidatorTest extends NsTest {
         //when & then
         assertThatCode(()->validateBonusNumber(input, List.of(1,2,3,4,5,6)))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_BONUS_NUMBER.getMessage());
+                .hasMessageContaining(DUPLICATE_LOTTO_NUMBERS.getMessage());
     }
 
     @ParameterizedTest
