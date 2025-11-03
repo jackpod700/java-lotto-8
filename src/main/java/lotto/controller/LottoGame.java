@@ -1,6 +1,9 @@
 package lotto.controller;
 
 import static camp.nextstep.edu.missionutils.Randoms.pickUniqueNumbersInRange;
+import static lotto.enums.LottoConstant.LOTTO_NUMBER_COUNT;
+import static lotto.enums.LottoConstant.LOTTO_NUMBER_MAX;
+import static lotto.enums.LottoConstant.LOTTO_NUMBER_MIN;
 import static lotto.enums.LottoConstant.LOTTO_PRICE;
 import static lotto.util.InputParser.parseBonusNumber;
 import static lotto.util.InputParser.parsePurchaseAmount;
@@ -95,7 +98,10 @@ public class LottoGame {
 
     private void generateLottoTickets() {
         for (int i = 0; i < ticketCount; i++) {
-            lottoTickets.add(new Lotto(pickUniqueNumbersInRange(1, 45, 6)));
+            lottoTickets.add(new Lotto(pickUniqueNumbersInRange(
+                    LOTTO_NUMBER_MIN.getValue(),
+                    LOTTO_NUMBER_MAX.getValue(),
+                    LOTTO_NUMBER_COUNT.getValue())));
         }
     }
 
