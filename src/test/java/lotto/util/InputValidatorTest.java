@@ -1,13 +1,13 @@
-package lotto.validator;
+package lotto.util;
 
 import static lotto.enums.ExceptionMessages.DUPLICATE_LOTTO_NUMBERS;
 import static lotto.enums.ExceptionMessages.INVALID_BONUS_NUMBER;
 import static lotto.enums.ExceptionMessages.INVALID_LOTTO_NUMBER_COUNT;
 import static lotto.enums.ExceptionMessages.INVALID_LOTTO_NUMBER_RANGE;
 import static lotto.enums.ExceptionMessages.INVALID_PURCHASE_AMOUNT;
-import static lotto.validator.InputValidator.validateBonusNumber;
-import static lotto.validator.InputValidator.validatePurchaseAmount;
-import static lotto.validator.InputValidator.validateWinningNumbers;
+import static lotto.util.InputValidator.validateBonusNumber;
+import static lotto.util.InputValidator.validatePurchaseAmount;
+import static lotto.util.InputValidator.validateWinningNumbers;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 

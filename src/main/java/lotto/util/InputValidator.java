@@ -1,4 +1,4 @@
-package lotto.validator;
+package lotto.util;
 
 import static lotto.enums.ExceptionMessages.DUPLICATE_LOTTO_NUMBERS;
 import static lotto.enums.ExceptionMessages.INVALID_LOTTO_NUMBER_COUNT;
@@ -16,7 +16,7 @@ import lotto.enums.ExceptionMessages;
 
 public class InputValidator {
 
-    private static final String NUMBER_DELIMITER = ",";
+    public static final String NUMBER_DELIMITER = ",";
 
     public static void validatePurchaseAmount(String input) throws IllegalArgumentException {
         int amount;
