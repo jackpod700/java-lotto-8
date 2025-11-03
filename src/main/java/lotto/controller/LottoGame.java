@@ -40,7 +40,7 @@ public class LottoGame {
     public void start() {
         getPurchaseAmount();
         generateLottoTickets();
-        printLottos(ticketCount,lottoTickets);
+        printLottos(ticketCount, lottoTickets);
         getWinningNumbers();
         getBonusNumber();
         calculatePrize();
@@ -48,13 +48,13 @@ public class LottoGame {
         printResult(prizeCounts, profitRate);
     }
 
-    private void getPurchaseAmount(){
+    private void getPurchaseAmount() {
         String purchaseAmountInput;
-        while(true){
-            try{
+        while (true) {
+            try {
                 purchaseAmountInput = readPurchaseAmount();
                 validatePurchaseAmount(purchaseAmountInput);
-            }catch(IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 continue;
             }
@@ -64,13 +64,13 @@ public class LottoGame {
         ticketCount = parsePurchaseAmount(purchaseAmountInput);
     }
 
-    private void getWinningNumbers(){
+    private void getWinningNumbers() {
         String winningNumbersInput;
-        while(true){
-            try{
+        while (true) {
+            try {
                 winningNumbersInput = readWinningNumbers();
                 validateWinningNumbers(winningNumbersInput);
-            }catch(IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 continue;
             }
@@ -79,13 +79,13 @@ public class LottoGame {
         winningNumbers = parseWinningNumbers(winningNumbersInput);
     }
 
-    private void getBonusNumber(){
+    private void getBonusNumber() {
         String bonusNumberInput;
-        while(true){
-            try{
+        while (true) {
+            try {
                 bonusNumberInput = readBonusNumber();
                 validateBonusNumber(bonusNumberInput, winningNumbers);
-            }catch(IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 continue;
             }
@@ -94,15 +94,15 @@ public class LottoGame {
         bonusNumber = parseBonusNumber(bonusNumberInput);
     }
 
-    private void generateLottoTickets(){
-        for(int i=0;i<ticketCount;i++){
-            lottoTickets.add(new Lotto(pickUniqueNumbersInRange(1,45,6)));
+    private void generateLottoTickets() {
+        for (int i = 0; i < ticketCount; i++) {
+            lottoTickets.add(new Lotto(pickUniqueNumbersInRange(1, 45, 6)));
         }
     }
 
-    private void calculatePrize(){
+    private void calculatePrize() {
         List<LottoPrize> prizes = new ArrayList<>();
-        for(Lotto lotto : lottoTickets){
+        for (Lotto lotto : lottoTickets) {
             prizes.add(lotto.calculateRank(winningNumbers, bonusNumber));
         }
         prizeCounts = prizes.stream()
@@ -112,7 +112,7 @@ public class LottoGame {
                 ));
     }
 
-    private void calculateProfit(){
+    private void calculateProfit() {
         long totalPrize = prizeCounts.entrySet().stream()
                 .mapToLong(entry -> {
                     int rank = entry.getKey(); // 키(등수) (예: 5)

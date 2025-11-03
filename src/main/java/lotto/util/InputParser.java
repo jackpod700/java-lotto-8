@@ -8,11 +8,11 @@ import java.util.List;
 
 public class InputParser {
 
-    public static int parsePurchaseAmount(String input){
-        return Integer.parseInt(input)/ LOTTO_PRICE.getValue();
+    public static int parsePurchaseAmount(String input) {
+        return Integer.parseInt(input) / LOTTO_PRICE.getValue();
     }
 
-    public static List<Integer> parseWinningNumbers(String input){
+    public static List<Integer> parseWinningNumbers(String input) {
         List<Integer> winningNumbers;
         winningNumbers = Arrays.stream(input.split(NUMBER_DELIMITER))
                 .map(String::trim)
@@ -21,7 +21,7 @@ public class InputParser {
         return winningNumbers;
     }
 
-    public static int parseBonusNumber(String input){
+    public static int parseBonusNumber(String input) {
         return Integer.parseInt(input);
     }
 }

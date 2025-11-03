@@ -39,33 +39,34 @@ public class LottoNumberValidator {
         validateDuplication(numbers);
     }
 
-    private static int validateIntegerParsable(String input){
-        try{
+    private static int validateIntegerParsable(String input) {
+        try {
             return Integer.parseInt(input.trim());
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE.getMessage());
         }
     }
 
     /**
      * 로또 당첨번호의 개수가 6개가 맞는지 검증하는 메소드
+     *
      * @param numbers
      */
-    private static void validateNumberCount(List<Integer> numbers){
-        if(numbers.size() != LOTTO_NUMBER_COUNT.getValue()){
+    private static void validateNumberCount(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_NUMBER_COUNT.getValue()) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_COUNT.getMessage());
         }
     }
 
-    private static void validateRange(int number){
-        if(number<LOTTO_NUMBER_MIN.getValue()||number>LOTTO_NUMBER_MAX.getValue()){
+    private static void validateRange(int number) {
+        if (number < LOTTO_NUMBER_MIN.getValue() || number > LOTTO_NUMBER_MAX.getValue()) {
             throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_RANGE.getMessage());
         }
     }
 
-    private static void validateDuplication(List<Integer> numbers){
+    private static void validateDuplication(List<Integer> numbers) {
         Set<Integer> numberSet = new HashSet<>(numbers);
-        if(numberSet.size() != numbers.size()){
+        if (numberSet.size() != numbers.size()) {
             throw new IllegalArgumentException(DUPLICATE_LOTTO_NUMBERS.getMessage());
         }
     }
